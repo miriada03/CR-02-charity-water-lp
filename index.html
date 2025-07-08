@@ -3,45 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
+    <title>charity: water - Sustainability starts here</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
-
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
-
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
+    <!-- Header Navigation: Top navigation bar with logo and donate button -->
+    <header class="header">
+        <div class="header-content">
+            <!-- Logo section with hamburger menu and charity: water text -->
+            <div class="logo-section">
+                <div class="menu-icon">☰</div>
+                <img src="img/cw_logo-2.png" alt="charity: water logo" class="logo">
+            </div>
+            <!-- Donate button in header -->
+            <a href="#" class="header-donate-button">Donate</a>
         </div>
-    </section>
+    </header>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
+    <!-- Main Hero Section: Large banner with headline and content -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Left side with text content -->
+            <div class="hero-text">
+                <h1>Sustainability starts here.</h1>
+                <p>Join charity: water on our mission to bring clean water to millions of people around the world. For healthy people and a healthy planet, clean water makes the difference.</p>
+                
+                <!-- Donation card -->
+                <div class="donation-card">
+                    <h3>Clean water matters now more than ever.</h3>
+                    <p class="donation-description">
+                        Build a healthier planet by equipping communities in need with the very foundation for climate resilience. Giving in support of clean water gets communities a higher quality of life and greater levels of education.
+                    </p>
+                    
+                    <!-- Donation form -->
+                    <div class="donation-form">
+                        <p class="donation-impact">100% of your donation makes an impact. Let's build a future greater than the sum.</p>
+                        
+                        <!-- Donation frequency buttons -->
+                        <div class="donation-frequency">
+                            <button class="frequency-button">GIVE ONCE</button>
+                            <button class="frequency-button active">MONTHLY</button>
+                        </div>
+                        
+                        <!-- Amount selection -->
+                        <div class="amount-section">
+                            <p class="amount-label">Choose an amount to give per month</p>
+                            <div class="amount-buttons">
+                                <button class="amount-button">$2 USD/mo</button>
+                                <button class="amount-button">$8 USD/mo</button>
+                                <button class="amount-button">$30 USD/mo</button>
+                                <button class="amount-button">$20 USD/mo</button>
+                                <button class="amount-button">Other amount</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Join mission button -->
+                        <button class="join-button">Join our mission</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right side with image -->
+            <div class="hero-image">
+                <img src="/img/cw.jpg" alt="Young girl drinking clean water from a tap" class="main-image">
+            </div>
+        </div>
     </section>
 </body>
 </html>

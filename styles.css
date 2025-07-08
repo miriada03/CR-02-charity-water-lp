@@ -3,6 +3,7 @@
 Primary Colors:
 - Yellow:     #FFC907
 - Blue:       #2E9DF7
+- Dark Blue:  #1A3B5C
 
 Secondary Colors:
 - Light Blue: #8BD1CB
@@ -20,179 +21,409 @@ Fonts:
 
 /* 
   Charity: Water Landing Page Styles
-  This CSS uses the provided color palette and beginner-friendly styles.
+  This CSS uses beginner-friendly layout methods and is well-commented for learning
 */
 
-/* Set up the main font and background color for the whole page */
-body {
-  background-color: #f4f8fb; /* Soft light blue for a fresh look */
-  font-family: 'Avenir', 'Proxima Nova', Arial, sans-serif;
+/* 
+  Reset styles: This removes default spacing from all elements 
+  so we can control the layout exactly how we want
+*/
+* {
   margin: 0;
   padding: 0;
-  color: #222;
+  box-sizing: border-box; /* Makes padding and borders count inside element width */
 }
 
-/* Add a slight shadow and rounded corners to each section for depth */
-section {
-  background: #fff; /* White background for sections */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft blue shadow */
-  margin: 24px 10px; /* Space between sections */
-  padding: 24px 16px;
+/* 
+  Set up the main font and background for the whole website
+  This applies to every element unless we override it later
+*/
+body {
+  font-family: 'Proxima Nova', 'Avenir', Arial, sans-serif; /* Use brand fonts */
+  background-color: #87CEEB; /* Light blue background */
+  color: #333; /* Dark gray text color */
+  line-height: 1.6; /* Space between lines of text for readability */
 }
 
-/* Hero Section Styles */
+/* 
+  Header Navigation Styles
+  The header contains the logo and donate button at the top
+*/
+.header {
+  background-color: #1A3B5C; /* Dark blue header background */
+  padding: 12px 0; /* Space above and below header content */
+  position: relative; /* Allows other elements to position relative to this */
+}
+
+/* 
+  Container for header content - centers it and sets max width
+*/
+.header-content {
+  max-width: 1200px; /* Don't let content get too wide on big screens */
+  margin: 0 auto; /* Center the content horizontally */
+  display: flex; /* Use flexbox to arrange items in a row */
+  justify-content: space-between; /* Put logo on left, donate button on right */
+  align-items: center; /* Center items vertically */
+  padding: 0 20px; /* Space on left and right sides */
+}
+
+/* 
+  Logo section - contains hamburger menu and logo image
+*/
+.logo-section {
+  display: flex; /* Arrange hamburger and logo in a row */
+  align-items: center; /* Center them vertically */
+  gap: 12px; /* Space between hamburger and logo */
+}
+
+/* Hamburger menu icon styling */
+.menu-icon {
+  color: white; /* White text color */
+  font-size: 18px; /* Size of the hamburger icon */
+  cursor: pointer; /* Show hand cursor when hovering */
+}
+
+/* Logo image styling */
+.logo {
+  width: 32px; /* Fixed width for logo */
+  height: 32px; /* Fixed height for logo */
+}
+
+/* Logo text styling */
+.logo-text {
+  color: white; /* White text color */
+  font-size: 18px; /* Text size */
+  font-weight: normal; /* Not bold */
+  letter-spacing: 0.5px; /* Small space between letters */
+}
+
+/* 
+  Header donate button styling
+  This is the yellow button in the top right
+*/
+.header-donate-button {
+  background-color: #FFC907; /* Yellow background using brand color */
+  color: #1A3B5C; /* Dark blue text */
+  padding: 8px 16px; /* Space inside the button (top/bottom, left/right) */
+  border-radius: 20px; /* Rounded corners */
+  text-decoration: none; /* Remove underline from link */
+  font-weight: bold; /* Make text bold */
+  font-size: 14px; /* Text size */
+  transition: all 0.3s ease; /* Smooth animation when hovering */
+}
+
+/* 
+  Change button appearance when user hovers over it
+  This gives visual feedback that it's clickable
+*/
+.header-donate-button:hover {
+  background-color: #FFD700; /* Slightly different yellow when hovering */
+  transform: translateY(-1px); /* Move button up slightly */
+}
+
+/* 
+  Hero Section Styles
+  This is the main content area with the big headline and donation form
+*/
 .hero {
-  position: relative; /* Needed for overlay */
-  /* Set a background image that covers the whole section */
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-  background-size: cover;      /* Make the image cover the whole area */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat;
-  color: #fff;                 /* White text for contrast */
-  text-align: center;          /* Center the text */
-  padding: 60px 20px;          /* Add space above and below */
-  border-radius: 0 0 16px 16px; /* Only round bottom corners */
-
-  /* Add a dark overlay for better text readability */
-  /* This uses a simple linear-gradient overlay */
-  background-blend-mode: darken;
-  background-color: rgba(46, 157, 247, 0.45); /* Blue overlay */
+  background-color: #87CEEB; /* Light blue background */
+  padding: 40px 20px; /* Space above/below and left/right */
+  min-height: 80vh; /* Make it at least 80% of screen height */
 }
 
-/* Make the headline bold and modern */
+/* 
+  Container for hero content - centers it and arranges in two columns
+  We use flexbox instead of grid for beginner-friendly layout
+*/
+.hero-content {
+  max-width: 1200px; /* Don't get too wide on big screens */
+  margin: 0 auto; /* Center horizontally */
+  display: flex; /* Use flexbox to arrange items */
+  gap: 60px; /* Space between left and right sides */
+  align-items: flex-start; /* Align items to top */
+}
+
+/* 
+  Left side of hero - contains text and donation card
+  flex: 1 means it takes up available space
+*/
+.hero-text {
+  flex: 1; /* Take up available space */
+  padding-right: 20px; /* Space on the right side */
+}
+
+/* 
+  Main headline styling
+  This is the big "Sustainability starts here." text
+*/
 .hero h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Soft shadow for readability */
+  font-size: 3.5em; /* Very large text */
+  font-weight: bold; /* Make it bold */
+  color: #1A3B5C; /* Dark blue color */
+  margin-bottom: 20px; /* Space below the headline */
+  line-height: 1.1; /* Tighter line spacing for big text */
 }
 
-/* Style the subheadline */
+/* 
+  Paragraph text below the headline
+*/
 .hero p {
-  font-size: 1.2em;
-  margin-top: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  font-size: 1.2em; /* Slightly larger than normal text */
+  color: #1A3B5C; /* Dark blue color */
+  margin-bottom: 30px; /* Space below the paragraph */
+  line-height: 1.5; /* Comfortable line spacing */
 }
 
-/* Story Section Styles */
-.story {
-  background-color: #8BD1CB; /* Secondary Light Blue */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
+/* 
+  Donation Card Styles
+  This is the white box with the donation form
+*/
+.donation-card {
+  background-color: white; /* White background */
+  border-radius: 12px; /* Rounded corners */
+  padding: 30px; /* Space inside the card */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 500px; /* Don't let it get too wide */
+  text-align: center; /* Center all text in the donation card */
 }
 
-/* Add accent color to section headings */
-h2 {
-  color: #2E9DF7; /* Primary blue */
-  margin-top: 0;
-  font-weight: bold;
+/* Donation card headline */
+.donation-card h3 {
+  font-size: 1.5em; /* Medium-large text */
+  color: #1A3B5C; /* Dark blue color */
+  margin-bottom: 15px; /* Space below */
+  font-weight: bold; /* Make it bold */
+  text-align: center; /* Center the heading */
 }
 
-/* Call-to-Action Section Styles */
-.call-to-action {
-  background-color: #FFC907; /* Primary Yellow */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
+/* Description text in donation card */
+.donation-description {
+  font-size: 1em; /* Normal text size */
+  color: #555; /* Medium gray color */
+  margin-bottom: 20px; /* Space below */
+  line-height: 1.5; /* Comfortable line spacing */
+  text-align: center; /* Center the description text */
 }
 
-/* Style the impact story image */
-.impact-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10);
+/* Impact statement text */
+.donation-impact {
+  font-size: 0.9em; /* Slightly smaller text */
+  color: #555; /* Medium gray color */
+  margin-bottom: 20px; /* Space below */
+  text-align: center; /* Center the text */
 }
 
-/* Donate Button Styles */
-.donate-button {
-  display: inline-block;
-  background-color: #4FCB53; /* Green */
-  color: #fff;
-  padding: 14px 32px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.1em;
-  margin-top: 18px;
-  box-shadow: 0 2px 8px rgba(79, 203, 83, 0.10);
-  transition: background 0.3s, transform 0.2s;
-  border: none;
-  cursor: pointer;
+/* 
+  Donation frequency buttons (Give Once / Monthly)
+  These are arranged side by side
+*/
+.donation-frequency {
+  display: flex; /* Arrange buttons in a row */
+  background-color: #f5f5f5; /* Light gray background */
+  border-radius: 4px; /* Slightly rounded corners */
+  margin-bottom: 20px; /* Space below */
 }
 
-/* Change button color when hovered */
-.donate-button:hover {
-  background-color: #159A48; /* Dark Green */
-  transform: translateY(-2px) scale(1.04); /* Slight lift */
+/* Individual frequency button styling */
+.frequency-button {
+  flex: 1; /* Each button takes equal space */
+  padding: 8px 16px; /* Space inside button */
+  border: none; /* Remove default button border */
+  background-color: transparent; /* No background by default */
+  color: #666; /* Gray text */
+  font-size: 12px; /* Small text */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Show hand cursor */
+  border-radius: 4px; /* Rounded corners */
+  transition: all 0.3s ease; /* Smooth animation */
 }
 
-/* Add some spacing between sections */
-section {
-  margin-bottom: 20px;
+/* Active frequency button (the selected one) */
+.frequency-button.active {
+  background-color: #FFC907; /* Yellow background for active button */
+  color: #1A3B5C; /* Dark blue text */
+}
+
+/* 
+  Amount selection section
+  Contains the label and amount buttons
+*/
+.amount-section {
+  margin-bottom: 25px; /* Space below this section */
+}
+
+/* Label above amount buttons */
+.amount-label {
+  font-size: 0.9em; /* Slightly smaller text */
+  color: #666; /* Gray text */
+  margin-bottom: 12px; /* Space below */
+  text-align: center; /* Center the amount label text */
+}
+
+/* 
+  Container for amount buttons
+  We arrange them in a simple 2-column layout using flexbox
+*/
+.amount-buttons {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow buttons to wrap to new lines */
+  gap: 8px; /* Space between buttons */
+}
+
+/* Individual amount button styling */
+.amount-button {
+  flex: 1 1 calc(50% - 4px); /* Each button takes about half width minus gap */
+  min-width: 120px; /* Minimum width so text doesn't get cramped */
+  padding: 12px 16px; /* Space inside button */
+  border: 2px solid #e0e0e0; /* Light gray border */
+  background-color: white; /* White background */
+  color: #333; /* Dark text */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Show hand cursor */
+  font-size: 14px; /* Text size */
+  transition: all 0.3s ease; /* Smooth animation */
+}
+
+/* Amount button when user hovers over it */
+.amount-button:hover {
+  border-color: #FFC907; /* Yellow border when hovering */
+  background-color: #fffdf0; /* Very light yellow background */
+}
+
+/* 
+  Main "Join our mission" button
+  This is the primary call-to-action button
+*/
+.join-button {
+  width: 100%; /* Take full width of container */
+  padding: 15px; /* Space inside button */
+  background-color: #FFC907; /* Yellow background using brand color */
+  color: #1A3B5C; /* Dark blue text */
+  border: none; /* Remove default button border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Medium text size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Show hand cursor */
+  transition: all 0.3s ease; /* Smooth animation */
+}
+
+/* Join button when user hovers over it */
+.join-button:hover {
+  background-color: #FFD700; /* Slightly different yellow when hovering */
+  transform: translateY(-2px); /* Move button up slightly */
+}
+
+/* 
+  Right side of hero - contains the main image
+  flex: 1 means it takes up available space
+*/
+.hero-image {
+  flex: 1; /* Take up available space */
+  position: relative; /* Allows positioning of child elements */
+  display: flex; /* Use flexbox */
+  align-items: flex-start; /* Align image to top of container */
+}
+
+/* Main hero image styling */
+.main-image {
+  width: 100%; /* Take full width of container */
+  height: auto; /* Let height adjust automatically to preserve aspect ratio */
+  min-height: 600px; /* Make sure image is at least as tall as the donation card */
+  object-fit: cover; /* Cover the area while preserving aspect ratio */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
 /* 
   Media Queries for Responsive Design
-  Media queries help make your website look good on different screen sizes,
-  like phones (small screens) and computers (large screens).
+  These help make the website look good on different screen sizes
+  Media queries are like "if statements" for CSS - they only apply
+  when certain conditions (like screen size) are met
 */
 
-/* This media query applies styles when the screen is 600px wide or less (like on most phones) */
-@media (max-width: 600px) {
-  /* Make hero section padding smaller on small screens */
-  .hero {
-    padding: 32px 8px;
-    font-size: 1em;
+/* 
+  Tablet and smaller screens (768px wide or less)
+  This includes most tablets in portrait mode
+*/
+@media (max-width: 768px) {
+  /* Change hero content from side-by-side to stacked layout */
+  .hero-content {
+    flex-direction: column; /* Stack items vertically instead of horizontally */
+    gap: 40px; /* Reduce gap between sections */
+    text-align: center; /* Center all text */
   }
-
-  /* Make headline font size smaller so it fits on small screens */
+  
+  /* Make headline smaller on tablets */
   .hero h1 {
-    font-size: 1.4em;
+    font-size: 2.5em; /* Smaller than desktop */
   }
-
-  /* Make subheadline font size smaller */
+  
+  /* Make paragraph text slightly smaller */
   .hero p {
-    font-size: 1em;
+    font-size: 1.1em; /* Slightly smaller than desktop */
   }
-
-  /* Make story and call-to-action sections have less padding */
-  .story,
-  .call-to-action,
-  .donation-section {
-    padding: 14px 8px;
+  
+  /* Make donation card take full width */
+  .donation-card {
+    max-width: 100%; /* Use full available width */
   }
-
-  /* Make impact story image smaller and stack above the text */
-  .impact-content {
-    display: block; /* Stack items vertically */
-    text-align: center;
-  }
-
-  .impact-image {
-    width: 90%;    /* Make image take up most of the width */
-    max-width: 220px;
+  
+  /* Make image shorter on tablets */
+  .main-image {
+    height: 300px; /* Fixed height for tablets */
   }
 }
 
-/* This media query applies styles when the screen is wider than 600px (like on tablets and computers) */
-@media (min-width: 601px) {
-  /* Show image and text side by side in the impact story */
-  .impact-content {
-    display: flex;           /* Place items in a row */
-    align-items: center;     /* Vertically center items */
-    justify-content: center; /* Center the whole group */
-    gap: 28px;               /* Space between image and text */
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
+/* 
+  Mobile phones (480px wide or less)
+  This covers most smartphones
+*/
+@media (max-width: 480px) {
+  /* Reduce padding in header on mobile */
+  .header-content {
+    padding: 0 15px; /* Less side padding */
   }
-
-  .impact-image {
-    width: 300px;
+  
+  /* Make logo text smaller on mobile */
+  .logo-text {
+    font-size: 16px; /* Smaller text */
+  }
+  
+  /* Reduce padding in hero section on mobile */
+  .hero {
+    padding: 20px 15px; /* Less padding overall */
+  }
+  
+  /* Make headline even smaller on mobile */
+  .hero h1 {
+    font-size: 2em; /* Smaller for mobile screens */
+  }
+  
+  /* Make paragraph text normal size on mobile */
+  .hero p {
+    font-size: 1em; /* Back to normal size */
+  }
+  
+  /* Reduce padding in donation card on mobile */
+  .donation-card {
+    padding: 20px; /* Less padding inside card */
+  }
+  
+  /* 
+    Stack amount buttons vertically on mobile
+    This makes them easier to tap with fingers
+  */
+  .amount-buttons {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+  
+  .amount-button {
+    flex: none; /* Don't use flex sizing */
+    width: 100%; /* Take full width */
+  }
+  
+  /* Make image shorter on mobile */
+  .main-image {
+    height: 250px; /* Even shorter for mobile */
   }
 }
