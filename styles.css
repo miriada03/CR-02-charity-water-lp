@@ -128,7 +128,7 @@ body {
 .hero {
   background-color: #87CEEB; /* Light blue background */
   padding: 0; /* Remove all padding */
-  min-height: 100vh; /* Make it full screen height */
+  min-height: 100vh; /* Use min-height instead of height for flexible sizing */
   display: flex; /* Use flexbox for the hero section */
   align-items: stretch; /* Stretch items to full height */
   position: relative; /* Allow absolute positioning of child elements */
@@ -143,21 +143,23 @@ body {
   justify-content: space-between; /* Space between left and right sides */
   align-items: stretch; /* Make both sides same height */
   width: 100%; /* Take full width */
-  min-height: 100vh; /* Full height */
+  min-height: 100vh; /* Use min-height for flexible sizing */
   position: relative; /* Allow absolute positioning */
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* 
   Left side of hero - contains text and donation card
-  Constrain to left half to avoid image overlap
+  Center content between left screen edge and image
 */
 .hero-text {
   width: 50%; /* Take only left half of screen */
   max-width: 50%; /* Ensure it never exceeds 50% */
-  padding: 40px 60px 40px 60px; /* Equal 60px margins on both sides for symmetry */
+  padding: 40px 30px; /* Equal padding on both sides for centering */
   display: flex; /* Use flexbox for vertical layout */
   flex-direction: column; /* Stack content vertically */
   justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally within the left area */
   position: relative; /* Position relative to allow z-index */
   z-index: 2; /* Place above the image */
   box-sizing: border-box; /* Include padding in width calculation */
@@ -196,10 +198,10 @@ body {
 .donation-card {
   background-color: white; /* White background */
   border-radius: 12px; /* Rounded corners */
-  padding: 40px; /* Increase padding for more spacious feel */
+  padding: 40px; /* Space inside the donation card */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  max-width: 100%; /* Take full width of left container */
-  width: 100%; /* Ensure it uses full available width */
+  max-width: 95%; /* Use more space - increased from 90% to 95% */
+  width: 95%; /* Use 95% of available width for less blue space */
   text-align: center; /* Center all text in the donation card */
   box-sizing: border-box; /* Include padding in width calculation */
 }
@@ -337,22 +339,26 @@ body {
 
 /* 
   Right side of hero - contains the main image
-  Position image to start directly under header
+  Position image to fill the entire right side from top to bottom
+  Only apply sticky behavior on larger screens
 */
 .hero-image {
   position: absolute; /* Position absolutely to ignore flex layout */
-  top: 0; /* Start at the very top (directly under header) */
+  top: 0; /* Start at the very top */
   right: 0; /* Align to right edge */
   width: 50%; /* Take half the screen width */
-  height: 100vh; /* Full viewport height */
+  height: 100vh; /* Full viewport height - same as hero container */
+  overflow: hidden; /* Hide any image overflow */
 }
 
-/* Main hero image styling - remove all styling */
+/* Main hero image styling */
 .main-image {
   width: 100%; /* Take full width of container */
-  height: 100%; /* Take full height of container */
+  height: 100vh; /* Take full viewport height */
   object-fit: cover; /* Cover the area while preserving aspect ratio */
   display: block; /* Remove any default inline styling */
+  border-left: 1px solid #1A3B5C; /* Add subtle dark blue border on left side */
+  object-position: center; /* Center the image within its container */
 }
 
 /* 
@@ -368,48 +374,63 @@ body {
 */
 @media (min-width: 2000px) {
   .hero-text {
-    padding: 40px 80px 40px 80px; /* Increased margins for large screens */
+    padding: 40px 60px 40px 60px; /* Reduced from 80px to 60px for more card space */
+  }
+  
+  /* Make donation card larger on very large screens */
+  .donation-card {
+    max-width: 90%; /* Use 90% instead of 95% on very large screens */
+    width: 90%; /* This prevents the card from getting too wide */
+    padding: 45px; /* Slightly more padding for large screens */
   }
 }
 
 /* 
   Medium screens (between 1600px and 1999px)
   This maintains the current desktop layout with standard margins
-  for very large screens that don't need the reduced margins
 */
 @media (max-width: 1999px) and (min-width: 1600px) {
   .hero-text {
-    padding: 40px 60px 40px 60px; /* Standard desktop margins */
+    padding: 40px 40px 40px 40px; /* Reduced from 60px to 40px for more space */
+  }
+  
+  /* Make donation card larger */
+  .donation-card {
+    max-width: 92%; /* Use 92% of available width */
+    width: 92%; /* Reduce blue space around the card */
+    padding: 35px; /* Comfortable padding */
   }
 }
 
 /* 
   Medium to smaller screens (1599px wide or less)
-  This covers the majority of popular screen sizes including:
-  - 1366x768 (most common laptop resolution)
-  - 1440x900, 1536x864 (common laptop resolutions)
-  - 1280x720, 1280x800, 1280x1024 (common desktop/laptop sizes)
-  - 1024x768 (tablets and smaller laptops)
-  - All tablet sizes in both orientations
-  This ensures the donation card is more prominent on most devices
+  This covers the majority of popular screen sizes
 */
 @media (max-width: 1599px) {
-  /* Reduce margins for wider donation card */
+  /* Adjust layout for better donation card centering */
   .hero-text {
     width: 60%; /* Take more space - 60% instead of 50% */
     max-width: 60%; /* Ensure it never exceeds 60% */
-    padding: 40px 25px; /* Increased from 5px to 25px margins on either side */
+    padding: 40px 15px; /* Reduced padding from 20px to 15px for more space */
+    align-items: center; /* Center content horizontally */
   }
   
-  /* Make hero image smaller */
+  /* Make hero image smaller but still full height */
   .hero-image {
     width: 40%; /* Reduce image to 40% instead of 50% */
+    height: 100vh; /* Keep full viewport height */
   }
   
-  /* Reduce donation card internal padding */
+  /* Make sure image still fills full height */
+  .main-image {
+    height: 100vh; /* Full viewport height */
+  }
+  
+  /* Make donation card larger with less margin */
   .donation-card {
-    padding: 25px; /* Reduced from 40px to 25px */
-    max-width: 100%; /* Use full available width */
+    padding: 30px; /* Slightly reduced padding from 40px to 30px */
+    max-width: 95%; /* Use even more space - increased from 85% to 95% */
+    width: 95%; /* Use 95% of available width for minimal blue space */
   }
 }
 
@@ -418,10 +439,19 @@ body {
   This includes most tablets in portrait mode
 */
 @media (max-width: 768px) {
+  /* Allow hero to be flexible height for stacked content */
+  .hero {
+    height: auto; /* Let height adjust based on content */
+    overflow: visible; /* Allow normal scrolling */
+    padding: 0; /* No padding */
+  }
+  
   /* Change hero content from side-by-side to stacked layout */
   .hero-content {
     flex-direction: column; /* Stack items vertically instead of horizontally */
-    gap: 40px; /* Reduce gap between sections */
+    height: auto; /* Let height adjust based on content */
+    overflow: visible; /* Allow normal scrolling */
+    gap: 30px; /* Space between sections */
     text-align: center; /* Center all text */
   }
   
@@ -429,6 +459,7 @@ body {
   .hero-text {
     width: 100%; /* Take full width */
     max-width: 100%; /* Use full available width */
+    padding: 40px 20px; /* Add padding for comfortable spacing */
     order: 1; /* Place headlines first */
   }
   
@@ -437,7 +468,7 @@ body {
     display: none; /* Hide donation card from hero-text container */
   }
   
-  /* Position image as centered block after headlines */
+  /* Position image as normal block after headlines */
   .hero-image {
     position: relative; /* Change from absolute to relative positioning */
     width: 100%; /* Take full width */
@@ -447,6 +478,25 @@ body {
     order: 2; /* Place image after headlines */
     display: flex; /* Use flex for centering */
     justify-content: center; /* Center the image horizontally */
+    padding: 0 20px; /* Small padding around image */
+    overflow: visible; /* Allow normal display */
+  }
+  
+  /* Make image normal size for tablets */
+  .main-image {
+    height: 300px; /* Fixed height for tablets */
+    width: calc(100% - 40px); /* Same width calculation as donation card */
+    max-width: calc(100% - 40px); /* Match donation card width exactly */
+    object-fit: cover; /* Cover the area while preserving aspect ratio */
+    border-left: 1px solid #1A3B5C; /* Keep the subtle border */
+  }
+  
+  /* Show the separate donation card and place it last */
+  .donation-card-separate {
+    display: block; /* Show the separate donation card */
+    order: 3; /* Place donation card last */
+    margin: 0 20px; /* Same horizontal margins as image */
+    width: calc(100% - 40px); /* Same width as image */
   }
   
   /* Make headline smaller on tablets */
@@ -458,20 +508,6 @@ body {
   .hero p {
     font-size: 1.1em; /* Slightly smaller than desktop */
   }
-  
-  /* Make image shorter on tablets and center it */
-  .main-image {
-    height: 300px; /* Fixed height for tablets */
-    width: 80%; /* Limit width to 80% for better centering */
-    max-width: 600px; /* Maximum width for larger tablets */
-    object-fit: cover; /* Cover the area while preserving aspect ratio */
-  }
-  
-  /* Show the separate donation card and place it last */
-  .donation-card-separate {
-    display: block; /* Show the separate donation card */
-    order: 3; /* Place donation card last */
-  }
 }
 
 /* 
@@ -479,10 +515,19 @@ body {
   This covers most smartphones
 */
 @media (max-width: 480px) {
+  /* Allow hero to be flexible height for mobile */
+  .hero {
+    height: auto; /* Let height adjust based on content */
+    overflow: visible; /* Allow normal scrolling */
+    padding: 0; /* No padding */
+  }
+  
   /* Stack content vertically with proper order */
   .hero-content {
     flex-direction: column; /* Stack items vertically */
-    gap: 30px; /* Reduce gap between sections */
+    height: auto; /* Let height adjust based on content */
+    overflow: visible; /* Allow normal scrolling */
+    gap: 20px; /* Smaller gap between sections */
     text-align: center; /* Center all text */
   }
   
@@ -490,7 +535,7 @@ body {
   .hero-text {
     width: 100%; /* Take full width */
     max-width: 100%; /* Use full available width */
-    padding: 20px 23px; /* Standard padding for mobile */
+    padding: 20px 15px; /* Small padding for mobile */
     order: 1; /* Place headlines first */
   }
   
@@ -499,7 +544,7 @@ body {
     display: none; /* Hide donation card from hero-text container */
   }
   
-  /* Position image as centered block after headlines */
+  /* Position image as normal block after headlines */
   .hero-image {
     position: relative; /* Change from absolute to relative positioning */
     width: 100%; /* Take full width */
@@ -509,39 +554,29 @@ body {
     order: 2; /* Place image after headlines */
     display: flex; /* Use flex for centering */
     justify-content: center; /* Center the image horizontally */
+    padding: 0 15px; /* Small padding around image */
+    overflow: visible; /* Allow normal display */
   }
   
-  /* Make image shorter on mobile and center it */
+  /* Make image smaller for mobile */
   .main-image {
-    height: 250px; /* Even shorter for mobile */
-    width: 90%; /* Limit width to 90% for better centering */
-    max-width: 400px; /* Maximum width for mobile */
+    height: 250px; /* Shorter for mobile */
+    width: calc(100% - 30px); /* Same width calculation as donation card */
+    max-width: calc(100% - 30px); /* Match donation card width exactly */
     object-fit: cover; /* Cover the area while preserving aspect ratio */
+    border-left: 1px solid #1A3B5C; /* Keep the subtle border */
   }
   
   /* Show the separate donation card and place it last */
   .donation-card-separate {
     display: block; /* Show the separate donation card */
-    padding: 20px; /* Reduced padding for mobile */
+    padding: 20px; /* Comfortable padding for mobile */
     order: 3; /* Place donation card last */
+    margin: 0 15px; /* Small horizontal margins */
+    width: calc(100% - 30px); /* Same width as image */
   }
   
-  /* Reduce padding in header on mobile */
-  .header-content {
-    padding: 0 15px; /* Less side padding */
-  }
-  
-  /* Make logo text smaller on mobile */
-  .logo-text {
-    font-size: 16px; /* Smaller text */
-  }
-  
-  /* Reduce padding in hero section on mobile */
-  .hero {
-    padding: 20px 15px; /* Less padding overall */
-  }
-  
-  /* Make headline even smaller on mobile */
+  /* Make headline smaller on mobile */
   .hero h1 {
     font-size: 2em; /* Smaller for mobile screens */
   }
@@ -567,14 +602,22 @@ body {
 
 /* 
   Very small screens (360px wide or less)
-  This covers the smallest smartphones where the side-by-side layout
-  becomes impractical and the image needs to move to the top
+  This covers the smallest smartphones
 */
 @media (max-width: 360px) {
-  /* Stack content vertically with proper separation */
+  /* Allow hero to be flexible height for very small screens */
+  .hero {
+    height: auto; /* Let height adjust based on content */
+    overflow: visible; /* Allow normal scrolling */
+    padding: 0; /* No padding */
+  }
+  
+  /* Stack content vertically with minimal spacing */
   .hero-content {
     flex-direction: column; /* Stack items vertically */
-    gap: 0; /* Remove gap to control spacing manually */
+    height: auto; /* Let height adjust based on content */
+    overflow: visible; /* Allow normal scrolling */
+    gap: 15px; /* Minimal gap between sections */
     text-align: center; /* Center all text */
   }
   
@@ -582,12 +625,11 @@ body {
   .hero-text {
     width: 100%; /* Take full width */
     max-width: 100%; /* Use full available width */
-    padding: 20px 15px; /* Standard padding for headlines */
+    padding: 15px 10px; /* Minimal padding for headlines */
     order: 1; /* Place headlines first */
     display: flex; /* Keep flex for headline centering */
     flex-direction: column; /* Stack headlines vertically */
     justify-content: center; /* Center headlines vertically */
-    min-height: 50vh; /* Take up half the screen initially */
   }
   
   /* Hide the original donation card nested in hero-text */
@@ -605,36 +647,27 @@ body {
     order: 2; /* Place image second, after headlines */
     display: flex; /* Use flex for centering */
     justify-content: center; /* Center the image horizontally */
+    padding: 0 10px; /* Minimal padding around image */
+    overflow: visible; /* Allow normal display */
   }
   
-  /* Make image responsive and shorter on very small screens */
+  /* Make image small for very small screens */
   .main-image {
-    width: 95%; /* Take most of the width */
+    width: calc(100% - 20px); /* Same width calculation as donation card */
     height: 200px; /* Fixed height for very small screens */
-    max-width: 350px; /* Maximum width for very small screens */
+    max-width: calc(100% - 20px); /* Match donation card width exactly */
     object-fit: cover; /* Cover the area while preserving aspect ratio */
+    border-left: 1px solid #1A3B5C; /* Keep the subtle border */
   }
   
   /* Show the separate donation card and place it last */
   .donation-card-separate {
     display: block; /* Show the separate donation card */
     padding: 15px; /* Minimal padding for maximum space usage */
-    margin: 20px 15px; /* Add margins for proper spacing */
+    margin: 15px 10px; /* Minimal margins for proper spacing */
     order: 3; /* Place donation card last */
-    width: calc(100% - 30px); /* Account for margins */
+    width: calc(100% - 20px); /* Same width as image */
     box-sizing: border-box; /* Include padding in width calculation */
-  }
-  
-  /* Make headline smaller on very small screens */
-  .hero h1 {
-    font-size: 1.8em; /* Even smaller for very small screens */
-    margin-bottom: 15px; /* Reduce space below */
-  }
-  
-  /* Make paragraph text smaller */
-  .hero p {
-    font-size: 0.9em; /* Smaller text for very small screens */
-    margin-bottom: 0; /* Remove bottom margin since donation card is separate */
   }
 }
 
@@ -642,5 +675,31 @@ body {
 @media (min-width: 769px) {
   .donation-card-separate {
     display: none; /* Hide separate donation card on larger screens */
+  }
+}
+
+/* 
+  Medium screens (tablets in portrait mode)
+  This handles screen sizes between 480px and 770px
+*/
+@media (max-width: 770px) and (min-width: 480px) {
+  /* For tablet sizes, center donation card in left area */
+  .hero-text {
+    align-items: center; /* Center content horizontally in left area */
+    padding: 40px 15px; /* Balanced padding for centering */
+  }
+  
+  /* Center donation card with proper margins */
+  .donation-card {
+    margin: 20px auto; /* Center horizontally with 20px top/bottom margin */
+    max-width: 85%; /* Limit width for better centering */
+    width: 85%; /* Use 85% of available width */
+  }
+  
+  /* Also center the separate donation card for small screens */
+  .donation-card-separate {
+    margin: 20px auto; /* Center horizontally with 20px top/bottom margin */
+    max-width: 85%; /* Limit width for better centering */
+    width: 85%; /* Use 85% of available width */
   }
 }
