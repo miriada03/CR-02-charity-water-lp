@@ -41,7 +41,7 @@ body {
 /* Header styles - navigation bar at the top of the page */
 .header {
     /* Make the header stick to the top of the page */
-    position: fixed;
+    position: static;
     /* Start from the very top */
     top: 0;
     /* Start from the very left */
@@ -155,55 +155,133 @@ body {
 
 /* Add space at the top of the main content so it doesn't hide behind the fixed header */
 .main-content {
-    /* Add more space at the top of the main content for the larger header */
-    margin-top: 80px;
-    /* Center the content */
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    /* Add padding on the sides */
-    padding: 40px 20px;
+    /* Use flexbox to arrange left column content only */
+    display: flex;
+    /* Put content in a single column */
+    flex-direction: column;
+    /* Align items at the start */
+    align-items: flex-start;
+    /* Remove top margin since header is no longer fixed */
+    margin-top: 0px;
+    /* Extend to full width but leave space for hero image */
+    max-width: calc(100vw - 30vw);
+    margin-left: 0;
+    margin-right: 0;
+    /* Add padding on left and top/bottom */
+    padding: 40px 40px 40px 40px;
     /* Use brand Dark Blue for text color */
     color: #1A3B5C;
 }
 
-.cw-main {
-    float: right;
-    /* Make the main image full width */
-    width: auto; /* Added missing semicolon */
-    /* Add rounded corners to the image */
-    border-radius: 15px;
-    /* Add shadow to make it look elevated */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* Left column container for text content and content container */
+.left-column {
+    /* Use flexbox to stack text content and content container vertically */
+    display: flex;
+    flex-direction: column;
+    /* Set a specific width instead of flex */
+    width: 600px;
+    flex-shrink: 0;
+    /* Add space between text content and content container */
+    gap: 40px;
+}
+
+.text-content {
+    /* Use flexbox to arrange content vertically */
+    display: flex;
+    flex-direction: column;
+    /* Limit the width so text doesn't get too wide */
+    max-width: 600px;
+}
+
+/* Main heading styling */
+.text-content h1 {
+    /* Much larger font size to match the screenshot */
+    font-size: 3.5em;
+    /* Make it very bold */
+    font-weight: 900;
+    /* Use brand Dark Blue color */
+    color: #1A3B5C;
+    /* Reduce margin for tighter spacing */
+    margin: 0 0 30px 0;
+    /* Improve line height for better readability */
+    line-height: 1.1;
+}
+
+/* Paragraph text styling */
+.text-content p {
+    /* Larger font size for better readability */
+    font-size: 1.3em;
+    /* Use brand Dark Blue color */
+    color: #1A3B5C;
+    /* Better line height for readability */
+    line-height: 1.5;
+    /* Remove default margin */
+    margin: 0;
+    /* Medium font weight */
+    font-weight: 500;
+}
+
+.hero-box {
+    /* Position fixed to the viewport to break out of all container constraints */
+    position: fixed;
+    /* Stick to the right edge of the viewport */
+    right: 0;
+    /* Start from the top of the content area (below nav bar) */
+    top: 60px;
+    /* Set width to exactly 30% of viewport width */
+    width: 30vw;
+    max-width: 30vw;
+    min-width: 300px;
+    /* Set height to fill viewport minus nav bar height */
+    height: calc(100vh - 60px);
+    /* Remove border radius to sit flush */
+    border-radius: 0;
+    /* Ensure the image doesn't overflow */
+    overflow: hidden;
+    /* Ensure it appears above background but below nav */
+    z-index: 10;
+}
+
+/* Style the hero image to fit nicely in its container */
+#hero-img {
+    /* Make the image fill the container completely */
+    width: 100%;
+    height: 100%;
+    /* Use object-fit to maintain aspect ratio while filling container */
+    object-fit: cover;
+    /* Center the image within the container */
+    object-position: center;
+    /* Remove border radius to sit flush with viewport */
+    border-radius: 0;
+    /* Add a subtle shadow for visual appeal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .content-container {
     /* Use brand Light Blue for background */
-    background-color: #c3e7ff;
+    background-color: rgba(195, 231, 255, 0.8);
     /* White background with rounded corners */
-    max-width: fit-content;
+    max-width: 650px;
     border-radius: 20px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-left: 40px;
-    padding-right: 0px;
+    padding: 0px 0px 0px 35px;
     /* Add shadow to make it look elevated */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     /* Use flexbox to arrange info-box and donation-section side by side */
     display: flex;
-    /* Add space between the boxes */
-    gap: 40px;
+    /* Remove gap so donation section can sit flush */
+    gap: 0px;
     /* Align items at the top */
     align-items: flex-start;
 }
 
 /* Info box containing text - left side */
 .info-box {
-    max-width: 500px;
+    max-width: 380px;
     /* Use flexbox to arrange text elements vertically */
     display: flex;
     flex-direction: column;
+    /* Add margin to the right to create space from donation section */
+    margin-right: 35px;
 }
 
 /* Remove unnecessary duplicate info-content style */
@@ -211,11 +289,12 @@ body {
 /* Info title styling */
 .info-title {
     /* Large heading for the info section */
-    font-size: 2.2em;
+    margin-top: 35px;
+    font-size: 2.0em;
     color: #1A3B5C;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: bold;
-    margin-top: 0;
+    line-height: 1.2;
 }
 
 /* Info text styling */
@@ -223,31 +302,39 @@ body {
     /* Paragraph text styling */
     color: #1A3B5C;
     line-height: 1.6;
-    font-size: 1.1em;
+    font-size: 1.0em;
     margin: 0;
+    font-weight: 400;
 }
 
 /* Donation section - right side */
 .donation-section {
-    /* Maximum width to keep it compact */
-    max-width: 300px;
+    /* Remove max width to let it expand */
+    flex: 0 0 auto;
+    width: 250px;
     /* Light background to distinguish from info section */
-    background-color: #eaf7ff;
+    background-color: rgba(255, 255, 255, 0.9);
     /* Add padding for internal spacing */
-    padding: 30px;
-    margin-top: -40px;
-    margin-bottom: -40px;
-    /* Rounded corners */
-    border-radius: 15px;
+    padding: 35px 25px;
+    /* Match container's border radius on the right side */
+    border-radius: 0 20px 20px 0;
+    /* Add subtle border */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Remove left border to sit flush */
+    border-left: none;
+    /* Add shadow for depth */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 /* Donation section content */
 .donation-info {
     /* Donation description text */
     color: #1A3B5C;
-    font-size: 1em;
-    margin-bottom: 20px;
+    font-size: 0.9em;
+    margin-bottom: 18px;
     font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
 }
 
 /* Donation type buttons container */
@@ -337,11 +424,79 @@ body {
 
 /* Mobile layout - stack sections vertically on phones */
 @media (max-width: 768px) {
+    /* Stack the main content vertically on mobile */
+    .main-content {
+        /* Change from row to column layout */
+        flex-direction: column;
+        /* Reduce gap for mobile */
+        gap: 30px;
+        /* Reduce top margin for mobile */
+        margin-top: 60px;
+        /* Reset padding for mobile */
+        padding: 20px 15px;
+        /* Reset max-width for mobile */
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Stack left column content with reduced gap on mobile */
+    .left-column {
+        gap: 30px;
+        /* Reset width for mobile */
+        width: 100%;
+    }
+    
+    /* Allow text content to use full width on mobile */
+    .text-content {
+        max-width: none;
+    }
+    
+    /* Smaller heading on mobile */
+    .text-content h1 {
+        font-size: 2.5em;
+    }
+    
+    /* Smaller paragraph text on mobile */
+    .text-content p {
+        font-size: 1.1em;
+    }
+    
+    /* Make hero box responsive on mobile */
+    .hero-box {
+        width: 100%;
+        height: 50vh;
+        margin-right: 0;
+        border-radius: 15px;
+        /* Center the image container */
+        align-self: center;
+    }
+    
+    /* Reset hero image for mobile */
+    #hero-img {
+        border-radius: 15px;
+    }
+    
     /* Stack the content-container sections vertically on mobile */
     .content-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 0px;
         padding: 25px;
+        max-width: none;
+    }
+    
+    /* Reset info box margin on mobile */
+    .info-box {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    
+    /* Reset donation section styling on mobile */
+    .donation-section {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 25px 20px;
     }
     
     /* Remove max width on mobile */
