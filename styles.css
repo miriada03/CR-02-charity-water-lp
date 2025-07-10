@@ -167,35 +167,46 @@ body {
     color: #1A3B5C;
 }
 
+.cw-main {
+    float: right;
+    /* Make the main image full width */
+    width: auto; /* Added missing semicolon */
+    /* Add rounded corners to the image */
+    border-radius: 15px;
+    /* Add shadow to make it look elevated */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
 .content-container {
     /* Use brand Light Blue for background */
     background-color: #c3e7ff;
     /* White background with rounded corners */
+    max-width: fit-content;
     border-radius: 20px;
-    padding: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 0px;
     /* Add shadow to make it look elevated */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
+    /* Use flexbox to arrange info-box and donation-section side by side */
+    display: flex;
+    /* Add space between the boxes */
+    gap: 40px;
+    /* Align items at the top */
+    align-items: flex-start;
 }
 
-/* Main box containing text. */
+/* Info box containing text - left side */
 .info-box {
-    /* Use flexbox to arrange text and donation side by side */
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-}
-
-/* Info section content (title and text) - floated left */
-.info-content {
-    /* Take up more space on the left */
-    flex: 2;
-}
-
-.info-title, .info-text {
+    max-width: 500px;
+    /* Use flexbox to arrange text elements vertically */
     display: flex;
     flex-direction: column;
 }
+
+/* Remove unnecessary duplicate info-content style */
 
 /* Info title styling */
 .info-title {
@@ -216,12 +227,18 @@ body {
     margin: 0;
 }
 
-/* Donation section - floated to the right */
+/* Donation section - right side */
 .donation-section {
-    float: right;
+    /* Maximum width to keep it compact */
     max-width: 300px;
+    /* Light background to distinguish from info section */
     background-color: #eaf7ff;
-
+    /* Add padding for internal spacing */
+    padding: 30px;
+    margin-top: -40px;
+    margin-bottom: -40px;
+    /* Rounded corners */
+    border-radius: 15px;
 }
 
 /* Donation section content */
@@ -320,8 +337,8 @@ body {
 
 /* Mobile layout - stack sections vertically on phones */
 @media (max-width: 768px) {
-    /* Stack the sections vertically on mobile */
-    .main-box {
+    /* Stack the content-container sections vertically on mobile */
+    .content-container {
         flex-direction: column;
         gap: 30px;
         padding: 25px;
