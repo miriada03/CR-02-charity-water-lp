@@ -48,8 +48,8 @@ body {
     left: 0;
     /* Stretch across the full width of the screen */
     width: 100%;
-    /* Set a more prominent height for the nav bar */
-    height: 60px;
+    /* Set a more prominent height for the nav bar - increased by 20px */
+    height: 80px;
     /* Use brand Dark Blue color */
     background-color: #1A3B5C;
     /* Make sure the header appears above other content */
@@ -141,8 +141,8 @@ body {
     border-radius: 12px;
     /* Show pointer when hovering */
     cursor: pointer;
-    /* Center the button vertically in the nav bar */
-    margin-top: 9px;
+    /* Center the button vertically in the taller nav bar */
+    margin-top: 19px;
     /* Add small padding from the right edge */
     margin-right: 15px;
 }
@@ -163,12 +163,15 @@ body {
     align-items: flex-start;
     /* Remove top margin since header is no longer fixed */
     margin-top: 0px;
-    /* Extend to full width but leave space for hero image */
+    /* Extend to full width but leave space for hero image - make responsive */
     max-width: calc(100vw - 30vw);
+    /* Add max-width to match header content container */
+    width: 100%;
+    max-width: min(calc(100vw - 30vw), 1400px);
     margin-left: 0;
     margin-right: 0;
-    /* Add padding on left and top/bottom */
-    padding: 40px 40px 40px 40px;
+    /* Add responsive padding with thicker left padding (+50px) */
+    padding: min(5vw, 40px) min(4vw, 40px) min(5vw, 40px) min(6vw, 90px);
     /* Use brand Dark Blue for text color */
     color: #1A3B5C;
 }
@@ -178,39 +181,41 @@ body {
     /* Use flexbox to stack text content and content container vertically */
     display: flex;
     flex-direction: column;
-    /* Set a specific width instead of flex */
-    width: 600px;
+    /* Make width responsive instead of fixed */
+    width: 100%;
+    max-width: min(90vw, 650px);
     flex-shrink: 0;
-    /* Add space between text content and content container */
-    gap: 40px;
+    /* Add responsive space between text content and content container */
+    gap: min(5vw, 40px);
 }
 
 .text-content {
     /* Use flexbox to arrange content vertically */
     display: flex;
     flex-direction: column;
-    /* Limit the width so text doesn't get too wide */
-    max-width: 600px;
+    /* Make width responsive instead of fixed */
+    width: 100%;
+    max-width: min(90vw, 600px);
 }
 
 /* Main heading styling */
 .text-content h1 {
-    /* Much larger font size to match the screenshot */
-    font-size: 3.5em;
+    /* Responsive font size that scales with viewport */
+    font-size: clamp(2.5em, 6vw, 3.5em);
     /* Make it very bold */
     font-weight: 900;
     /* Use brand Dark Blue color */
     color: #1A3B5C;
-    /* Reduce margin for tighter spacing */
-    margin: 0 0 30px 0;
+    /* Responsive margin */
+    margin: 0 0 min(4vw, 30px) 0;
     /* Improve line height for better readability */
     line-height: 1.1;
 }
 
 /* Paragraph text styling */
 .text-content p {
-    /* Larger font size for better readability */
-    font-size: 1.3em;
+    /* Responsive font size */
+    font-size: clamp(1.1em, 2.5vw, 1.3em);
     /* Use brand Dark Blue color */
     color: #1A3B5C;
     /* Better line height for readability */
@@ -222,24 +227,26 @@ body {
 }
 
 .hero-box {
-    /* Position fixed to the viewport to break out of all container constraints */
+    /* Position fixed to viewport to align properly with screen edges */
     position: fixed;
     /* Stick to the right edge of the viewport */
     right: 0;
-    /* Start from the top of the content area (below nav bar) */
-    top: 60px;
-    /* Set width to exactly 30% of viewport width */
+    /* Start immediately below the taller nav bar */
+    top: 80px;
+    /* Set width to exactly 30% of viewport width - responsive */
     width: 30vw;
-    max-width: 30vw;
-    min-width: 300px;
-    /* Set height to fill viewport minus nav bar height */
-    height: calc(100vh - 60px);
+    /* Height will be set by JavaScript to end exactly at impact story */
+    height: calc(100vh - 360px); /* Fallback height adjusted for taller nav */
     /* Remove border radius to sit flush */
     border-radius: 0;
     /* Ensure the image doesn't overflow */
     overflow: hidden;
-    /* Ensure it appears above background but below nav */
+    /* Ensure it appears above background but below nav and impact story */
     z-index: 10;
+    /* Remove any margin that might create gaps */
+    margin: 0;
+    /* Remove any padding that might create gaps */
+    padding: 0;
 }
 
 /* Style the hero image to fit nicely in its container */
@@ -260,10 +267,12 @@ body {
 .content-container {
     /* Use brand Light Blue for background */
     background-color: rgba(195, 231, 255, 0.8);
-    /* White background with rounded corners */
-    max-width: 650px;
+    /* Responsive width that adapts to viewport */
+    width: 100%;
+    max-width: min(90vw, 650px);
     border-radius: 20px;
-    padding: 0px 0px 0px 35px;
+    /* Responsive padding */
+    padding: 0px 0px 0px min(4vw, 35px);
     /* Add shadow to make it look elevated */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     /* Use flexbox to arrange info-box and donation-section side by side */
@@ -276,23 +285,27 @@ body {
 
 /* Info box containing text - left side */
 .info-box {
-    max-width: 380px;
+    /* Make width responsive */
+    flex: 1;
+    min-width: 0;
+    max-width: min(60vw, 380px);
     /* Use flexbox to arrange text elements vertically */
     display: flex;
     flex-direction: column;
-    /* Add margin to the right to create space from donation section */
-    margin-right: 35px;
+    /* Responsive margin to the right */
+    margin-right: min(4vw, 35px);
 }
 
 /* Remove unnecessary duplicate info-content style */
 
 /* Info title styling */
 .info-title {
-    /* Large heading for the info section */
-    margin-top: 35px;
-    font-size: 2.0em;
+    /* Responsive font size for the info section */
+    font-size: clamp(1.5em, 3.5vw, 2.0em);
     color: #1A3B5C;
-    margin-bottom: 25px;
+    /* Responsive margins */
+    margin-top: min(4vw, 35px);
+    margin-bottom: min(3vw, 25px);
     font-weight: bold;
     line-height: 1.2;
 }
@@ -309,13 +322,14 @@ body {
 
 /* Donation section - right side */
 .donation-section {
-    /* Remove max width to let it expand */
+    /* Make responsive instead of fixed width */
     flex: 0 0 auto;
-    width: 250px;
+    width: min(35vw, 250px);
+    min-width: 200px;
     /* Light background to distinguish from info section */
     background-color: rgba(255, 255, 255, 0.9);
-    /* Add padding for internal spacing */
-    padding: 35px 25px;
+    /* Responsive padding for internal spacing */
+    padding: min(4vw, 35px) min(3vw, 25px);
     /* Match container's border radius on the right side */
     border-radius: 0 20px 20px 0;
     /* Add subtle border */
@@ -422,6 +436,180 @@ body {
     background: #FF902A;
 }
 
+/* Impact Story Section - showcasing real-world impact */
+.impact-story-section {
+    /* Stretch across the full viewport width */
+    width: 100vw;
+    /* Position relative to break out of container constraints */
+    position: relative;
+    /* Move left to align with viewport edge - account for increased left padding */
+    left: calc(-1 * min(6vw, 90px));
+    /* Add responsive spacing above and below the impact story */
+    margin: min(8vw, 60px) 0 min(6vw, 40px) 0;
+    /* Use white background for the large bar effect */
+    background-color: #ffffff;
+    /* Add responsive padding around the content */
+    padding: min(8vw, 60px) 0;
+    /* Add subtle shadow for depth */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Ensure it appears above hero-box with higher z-index */
+    z-index: 100;
+}
+
+/* Inner container for flexible layout options */
+.impact-story-container {
+    /* Center the content within the full-width section - make responsive */
+    max-width: calc(100vw - 30vw - min(10vw, 80px));
+    margin: 0 auto;
+    /* Use flexbox for side-by-side layout */
+    display: flex;
+    /* Align items at the center */
+    align-items: center;
+    /* Add responsive space between image and text */
+    gap: min(8vw, 60px);
+    /* Add responsive horizontal padding */
+    padding: 0 min(5vw, 40px);
+}
+
+/* Image container */
+.impact-story-image {
+    /* Take up responsive space for the image */
+    flex: 0 0 min(40vw, 300px);
+    /* Center the image within its container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Text content area */
+.impact-story-text {
+    /* Take up remaining space */
+    flex: 1;
+    /* Use flexbox to stack text elements vertically */
+    display: flex;
+    flex-direction: column;
+    /* Add responsive space between text elements */
+    gap: min(3vw, 20px);
+    /* Add responsive left padding for breathing room */
+    padding-left: min(3vw, 20px);
+}
+
+/* Impact story title styling */
+.impact-story-title {
+    /* Responsive font size for the heading */
+    font-size: clamp(1.4em, 3vw, 1.8em);
+    font-weight: bold;
+    /* Use brand Dark Blue color */
+    color: #1A3B5C;
+    /* Remove default margins */
+    margin: 0;
+    /* Better line height for readability */
+    line-height: 1.3;
+}
+
+/* Impact story description text */
+.impact-story-description {
+    /* Responsive font size for readability */
+    font-size: clamp(1.0em, 2vw, 1.1em);
+    /* Use brand Dark Blue color */
+    color: #1A3B5C;
+    /* Better line height for readability */
+    line-height: 1.6;
+    /* Remove default margins */
+    margin: 0;
+    /* Medium font weight */
+    font-weight: 400;
+}
+
+/* Impact statistics text */
+.impact-story-stats {
+    /* Responsive font size for stats */
+    font-size: clamp(0.9em, 1.8vw, 1.0em);
+    /* Use brand Dark Blue color */
+    color: #1A3B5C;
+    /* Better line height for readability */
+    line-height: 1.6;
+    /* Remove default margins */
+    margin: 0;
+    /* Medium font weight */
+    font-weight: 500;
+}
+
+/* Impact story image styling */
+.impact-img {
+    /* Make image responsive */
+    width: min(35vw, 250px);
+    height: min(35vw, 250px);
+    /* Use object-fit to maintain aspect ratio */
+    object-fit: cover;
+    /* Add rounded corners */
+    border-radius: 12px;
+    /* Add subtle shadow */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tablet and smaller desktop responsiveness */
+@media (max-width: 1024px) {
+    /* Adjust hero-box for smaller screens */
+    .hero-box {
+        /* Increase width percentage for smaller screens */
+        width: 35vw;
+    }
+    
+    /* Adjust main content width accordingly */
+    .main-content {
+        max-width: min(calc(100vw - 35vw), 1400px);
+    }
+    
+    /* Adjust impact story container for smaller screens */
+    .impact-story-container {
+        max-width: calc(100vw - 35vw - min(8vw, 60px));
+    }
+}
+
+/* Small tablet responsiveness */
+@media (max-width: 900px) {
+    /* Further adjust hero-box for very small screens before mobile */
+    .hero-box {
+        width: 40vw;
+    }
+    
+    .main-content {
+        max-width: min(calc(100vw - 40vw), 1400px);
+        /* Adjust left padding for smaller screens */
+        padding: min(5vw, 40px) min(4vw, 40px) min(5vw, 40px) min(5vw, 70px);
+    }
+    
+    .impact-story-container {
+        max-width: calc(100vw - 40vw - min(6vw, 40px));
+    }
+    
+    .impact-story-section {
+        /* Adjust left offset for smaller tablet left padding */
+        left: calc(-1 * min(5vw, 70px));
+    }
+    
+    /* Stack content container on smaller tablets */
+    .content-container {
+        flex-direction: column;
+        gap: 0px;
+        padding: min(4vw, 25px);
+    }
+    
+    .info-box {
+        margin-right: 0;
+        margin-bottom: min(3vw, 20px);
+        max-width: none;
+    }
+    
+    .donation-section {
+        width: 100%;
+        min-width: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
 /* Mobile layout - stack sections vertically on phones */
 @media (max-width: 768px) {
     /* Stack the main content vertically on mobile */
@@ -429,11 +617,11 @@ body {
         /* Change from row to column layout */
         flex-direction: column;
         /* Reduce gap for mobile */
-        gap: 30px;
-        /* Reduce top margin for mobile */
-        margin-top: 60px;
-        /* Reset padding for mobile */
-        padding: 20px 15px;
+        gap: min(4vw, 30px);
+        /* Add top margin for mobile to account for fixed header */
+        margin-top: 80px;
+        /* Reset padding for mobile - reduce left padding significantly */
+        padding: min(3vw, 20px) min(2vw, 15px) min(3vw, 20px) min(3vw, 25px);
         /* Reset max-width for mobile */
         max-width: none;
         margin-left: auto;
@@ -442,9 +630,10 @@ body {
     
     /* Stack left column content with reduced gap on mobile */
     .left-column {
-        gap: 30px;
+        gap: min(4vw, 30px);
         /* Reset width for mobile */
         width: 100%;
+        max-width: none;
     }
     
     /* Allow text content to use full width on mobile */
@@ -464,12 +653,18 @@ body {
     
     /* Make hero box responsive on mobile */
     .hero-box {
-        width: 100%;
-        height: 50vh;
-        margin-right: 0;
-        border-radius: 15px;
-        /* Center the image container */
-        align-self: center;
+        /* Reset positioning for mobile - use relative to follow document flow */
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        height: 300px !important;
+        margin: 20px 0 !important;
+        border-radius: 15px !important;
+        /* Reset z-index for mobile */
+        z-index: auto !important;
+        /* Order it first in the flex layout */
+        order: -1;
     }
     
     /* Reset hero image for mobile */
@@ -511,6 +706,59 @@ body {
     
     .amount-btn {
         min-width: 100%;
+    }
+    
+    /* Impact story mobile styles */
+    .impact-story-section {
+        /* Keep full width on mobile */
+        width: 100vw;
+        /* Adjust left offset for mobile reduced padding */
+        left: calc(-1 * min(3vw, 25px));
+        /* Reduce margins and padding for mobile */
+        margin: min(6vw, 40px) 0 min(4vw, 30px) 0;
+        padding: min(6vw, 40px) 0;
+    }
+    
+    /* Stack impact story content vertically on mobile */
+    .impact-story-container {
+        /* Change to column layout */
+        flex-direction: column;
+        /* Reduce gap for mobile */
+        gap: min(4vw, 30px);
+        /* Reset max-width and padding for mobile */
+        max-width: none;
+        padding: 0 min(3vw, 20px);
+    }
+    
+    /* Reset image container for mobile */
+    .impact-story-image {
+        /* Reset flex properties for mobile */
+        flex: none;
+        /* Center the image */
+        justify-content: center;
+    }
+    
+    /* Reset text container for mobile */
+    .impact-story-text {
+        /* Remove left padding on mobile */
+        padding-left: 0;
+        /* Center text on mobile */
+        text-align: center;
+    }
+    
+    /* Adjust text sizes for mobile */
+    .impact-story-title {
+        font-size: 1.5em;
+    }
+    
+    .impact-story-description {
+        font-size: 1.0em;
+    }
+    
+    /* Make image smaller on mobile */
+    .impact-img {
+        width: min(50vw, 200px);
+        height: min(50vw, 200px);
     }
 }
 

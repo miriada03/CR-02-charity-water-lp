@@ -21,8 +21,13 @@
         </div>
     </header>
 
+    <!-- Hero image on the right side - positioned fixed to viewport -->
+    <div class="hero-box">
+        <img id="hero-img" src="img/cw.jpg" alt="Girl drinking water">
+    </div>
+
     <!-- Main content area -->
-    <main class="main-content">
+    <main class="main-content">        
         <!-- Left column containing text content and detailed info -->
         <div class="left-column">
             <div class="text-content">
@@ -77,10 +82,56 @@
         </div>
         </div>
         
-        <!-- Hero image on the right side -->
-        <div class="hero-box">
-            <img id="hero-img" src="img/cw.jpg" alt="Girl drinking water">
+        <!-- Impact Story Section -->
+        <div class="impact-story-section">
+            <!-- Inner container for layout flexibility -->
+            <div class="impact-story-container">
+                <!-- Text content for the impact story -->
+                <div class="impact-story-text">
+                    <h2 class="impact-story-title">Maria's Story: Clean Water Changes Everything</h2>
+                    
+                    <p class="impact-story-description">
+                        Before clean water came to her village in Ethiopia, 8-year-old Maria walked 
+                        3 hours every day to collect water from a distant pond. Now, with a new well 
+                        just 5 minutes from her home, Maria attends school full-time and dreams of 
+                        becoming a teacher.
+                    </p>
+                    
+                    <p class="impact-story-stats">
+                        <strong>663 million people</strong> still lack access to clean water. 
+                        Your donation can help change that, one community at a time.
+                    </p>
+                </div>
+                
+                <!-- Image container for the impact story -->
+                <div class="impact-story-image">
+                    <img src="img/Zimbabwe_2022_CG-9610.jpg" alt="Maria at the new water well in her village" class="impact-img">
+                </div>
+            </div>
         </div>
     </main>
+
+    <script>
+        // JavaScript to make hero-box responsive to impact story position
+        function adjustHeroBoxHeight() {
+            const heroBox = document.querySelector('.hero-box');
+            const impactStory = document.querySelector('.impact-story-section');
+            
+            if (heroBox && impactStory && window.innerWidth > 768) {
+                // Only apply on desktop/tablet, not mobile
+                const headerHeight = 80; // Updated header height
+                const impactStoryTop = impactStory.offsetTop;
+                const newHeight = impactStoryTop - headerHeight;
+                
+                heroBox.style.height = newHeight + 'px';
+            }
+        }
+
+        // Run on page load
+        window.addEventListener('load', adjustHeroBoxHeight);
+        
+        // Run on window resize to maintain responsiveness
+        window.addEventListener('resize', adjustHeroBoxHeight);
+    </script>
 </body>
 </html>
