@@ -1,3 +1,43 @@
+/* charity: water Brand Colors & Fonts
+
+Primary Colors:
+- Yellow:     #FFC907
+- Blue:       #2E9DF7
+- Dark Blue:  #1A3B5C
+
+Secondary Colors:
+- Light Blue: #8BD1CB
+- Green:      #4FCB53
+- Orange:     #FF902A
+- Red:        #F5402C
+- Dark Green: #159A48
+- Pink:       #F16061
+
+Fonts:
+- Proxima Nova
+- Avenir
+
+*/
+
+/* 
+  Charity: Water Landing Page Styles
+  This CSS uses beginner-friendly layout methods and is well-commented for learning
+*/ 
+
+/* Apply brand fonts to all text on the page */
+body {
+    /* Use charity: water brand fonts */
+    font-family: 'Proxima Nova', 'Avenir', Arial, sans-serif;
+    /* Remove default margin and padding */
+    margin: 0;
+    padding: 0;
+    /* Use brand Light Blue gradient background */
+    background: linear-gradient(135deg, #2E9DF7 0%, #8BD1CB 100%);
+    /* Ensure full height */
+    min-height: 100vh;
+}
+
+
 /* Header styles - navigation bar at the top of the page */
 .header {
     /* Make the header stick to the top of the page */
@@ -8,10 +48,10 @@
     left: 0;
     /* Stretch across the full width of the screen */
     width: 100%;
-    /* Set the height to 25px as requested */
+    /* Set a more prominent height for the nav bar */
     height: 60px;
-    /* Dark blue background color */
-    background-color: #1a3b5c;
+    /* Use brand Dark Blue color */
+    background-color: #1A3B5C;
     /* Make sure the header appears above other content */
     z-index: 1000;
 }
@@ -19,138 +59,286 @@
 /* Header content container */
 .header-content {
     /* Center the content with maximum width */
-    max-width: 1200px;
+    max-width: 1400px;
     /* Center the container on the page */
     margin: 0 auto;
-    /* Add some space on the sides */
-    padding: 0 20px;
-    /* Use flexbox to arrange logo and button */
-    display: flex;
-    /* Put logo on left, button on right */
-    justify-content: space-between;
-    /* Center items vertically in the 25px height */
-    align-items: center;
+    /* Remove side padding to allow menu to go all the way left and button further right */
+    padding: 0;
     /* Make sure it takes the full height */
+    height: 100%;
+    /* Clear any floated elements */
+    overflow: hidden;
+}
+
+/* Menu section - floated to the far left */
+.menu {
+    /* Float the menu all the way to the left */
+    float: left;
+    /* Center the menu image vertically */
+    display: flex;
+    align-items: center;
+    /* Make it take the full height */
+    height: 100%;
+    /* Remove any margin to ensure it's all the way left */
+    margin: 0;
+    /* Add small padding from the very edge */
+    padding-left: 15px;
+}
+
+/* Menu image */
+.menu img {
+    /* Make the menu image larger for more prominence */
+    width: 29px;
+    height: 29px;
+}
+
+/* Logo section - positioned beside the menu */
+.logo {
+    /* Float the logo to the left, next to the menu */
+    float: left;
+    /* Put logo icon and text side by side */
+    display: flex;
+    /* Center the logo items vertically */
+    align-items: center;
+    /* White text color */
+    color: white;
+    /* Larger font size for more prominent logo */
+    font-size: 18px;
+    /* Make the text bold */
+    font-weight: bold;
+    /* Add proper space between menu and logo */
+    margin-left: 20px;
+    /* Make it take the full height */
     height: 100%;
 }
 
-/* Story Section Styles */
-.story {
-  background-color: #8BD1CB; /* Secondary Light Blue */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
+/* Logo icon image */
+.logo-icon {
+    /* Make the icon larger for more prominence */
+    width: auto;
+    height: 28px;
+    /* Add small space between icon and text */
+    margin-right: 8px;
 }
 
-/* Add accent color to section headings */
-h2 {
-  color: #2E9DF7; /* Primary blue */
-  margin-top: 0;
-  font-weight: bold;
-}
-
-/* Call-to-Action Section Styles */
-.call-to-action {
-  background-color: #FFC907; /* Primary Yellow */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-/* Style the impact story image */
-.impact-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10);
-}
-
-/* Donate Button Styles */
+/* Donate button - floated to the right */
 .donate-button {
-  display: inline-block;
-  background-color: #4FCB53; /* Green */
-  color: #fff;
-  padding: 14px 32px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.1em;
-  margin-top: 18px;
-  box-shadow: 0 2px 8px rgba(79, 203, 83, 0.10);
-  transition: background 0.3s, transform 0.2s;
-  border: none;
-  cursor: pointer;
+    /* Float the donate button to the right */
+    float: right;
+    /* Use brand Yellow color */
+    background-color: #FFC907;
+    /* Use brand Dark Blue for text */
+    color: #1A3B5C;
+    /* Remove default button border */
+    border: none;
+    /* Increase padding for more prominent button */
+    padding: 10px 20px;
+    /* Larger font size for better visibility */
+    font-size: 14px;
+    /* Make text bold */
+    font-weight: bold;
+    /* Rounded corners */
+    border-radius: 12px;
+    /* Show pointer when hovering */
+    cursor: pointer;
+    /* Center the button vertically in the nav bar */
+    margin-top: 9px;
+    /* Add small padding from the right edge */
+    margin-right: 15px;
 }
 
-/* Change button color when hovered */
+/* Donate button hover effect */
 .donate-button:hover {
-  background-color: #159A48; /* Dark Green */
-  transform: translateY(-2px) scale(1.04); /* Slight lift */
+    /* Slightly darker yellow when hovering - using Orange from brand palette */
+    background-color: #FF902A;
 }
 
-/* Add some spacing between sections */
-section {
-  margin-bottom: 20px;
+/* Add space at the top of the main content so it doesn't hide behind the fixed header */
+.main-content {
+    /* Add more space at the top of the main content for the larger header */
+    margin-top: 80px;
+    /* Center the content */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Add padding on the sides */
+    padding: 40px 20px;
+    /* Use brand Dark Blue for text color */
+    color: #1A3B5C;
 }
 
-/* 
-  Media Queries for Responsive Design
-  Media queries help make your website look good on different screen sizes,
-  like phones (small screens) and computers (large screens).
-*/
+.content-container {
+    /* Use brand Light Blue for background */
+    background-color: #c3e7ff;
+    /* White background with rounded corners */
+    border-radius: 20px;
+    padding: 40px;
+    /* Add shadow to make it look elevated */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
 
-/* This media query applies styles when the screen is 600px wide or less (like on most phones) */
-@media (max-width: 600px) {
-  /* Make hero section padding smaller on small screens */
-  .hero {
-    padding: 32px 8px;
+/* Main box containing text. */
+.info-box {
+    /* Use flexbox to arrange text and donation side by side */
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+/* Info section content (title and text) - floated left */
+.info-content {
+    /* Take up more space on the left */
+    flex: 2;
+}
+
+.info-title, .info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Info title styling */
+.info-title {
+    /* Large heading for the info section */
+    font-size: 2.2em;
+    color: #1A3B5C;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+/* Info text styling */
+.info-text {
+    /* Paragraph text styling */
+    color: #1A3B5C;
+    line-height: 1.6;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+/* Donation section - floated to the right */
+.donation-section {
+    float: right;
+    max-width: 300px;
+    background-color: #eaf7ff;
+
+}
+
+/* Donation section content */
+.donation-info {
+    /* Donation description text */
+    color: #1A3B5C;
     font-size: 1em;
-  }
+    margin-bottom: 20px;
+    font-weight: 500;
+}
 
-  /* Make headline font size smaller so it fits on small screens */
-  .hero h1 {
-    font-size: 1.4em;
-  }
+/* Donation type buttons container */
+.donation-type {
+    /* Put buttons side by side */
+    display: flex;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    padding: 3px;
+}
 
-  /* Make subheadline font size smaller */
-  .hero p {
+.donation-type-btn {
+    /* Individual donation type buttons */
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8em;
+    border-radius: 4px;
+    color: #1A3B5C;
+}
+
+.donation-type-btn.active {
+    /* Active state for selected button */
+    background: #FFC907;
+    color: #1A3B5C;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Amount selection label */
+.amount-label {
+    /* Label for amount selection */
+    color: #1A3B5C;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+/* Amount buttons container */
+.amount-options {
+    /* Simple layout for amount buttons */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.amount-btn {
+    /* Individual amount buttons */
+    flex: 1;
+    min-width: 45%;
+    padding: 10px 12px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    color: #1A3B5C;
+}
+
+.amount-btn:hover {
+    /* Hover effect for amount buttons */
+    border-color: #FFC907;
+    background: rgba(255, 201, 7, 0.2);
+}
+
+/* Join mission button */
+.join-mission-btn {
+    /* Main call-to-action button */
+    width: 100%;
+    padding: 12px;
+    background: #FFC907;
+    color: #1A3B5C;
+    border: none;
+    border-radius: 6px;
     font-size: 1em;
-  }
-
-  /* Make story and call-to-action sections have less padding */
-  .story,
-  .call-to-action,
-  .donation-section {
-    padding: 14px 8px;
-  }
-
-  /* Make impact story image smaller and stack above the text */
-  .impact-content {
-    display: block; /* Stack items vertically */
-    text-align: center;
-  }
-
-  .impact-image {
-    width: 90%;    /* Make image take up most of the width */
-    max-width: 220px;
-  }
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* This media query applies styles when the screen is wider than 600px (like on tablets and computers) */
-@media (min-width: 601px) {
-  /* Show image and text side by side in the impact story */
-  .impact-content {
-    display: flex;           /* Place items in a row */
-    align-items: center;     /* Vertically center items */
-    justify-content: center; /* Center the whole group */
-    gap: 28px;               /* Space between image and text */
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .impact-image {
-    width: 300px;
-  }
+.join-mission-btn:hover {
+    /* Hover effect for join mission button */
+    background: #FF902A;
 }
+
+/* Mobile layout - stack sections vertically on phones */
+@media (max-width: 768px) {
+    /* Stack the sections vertically on mobile */
+    .main-box {
+        flex-direction: column;
+        gap: 30px;
+        padding: 25px;
+    }
+    
+    /* Remove max width on mobile */
+    .donation-section {
+        max-width: none;
+    }
+    
+    /* Make amount buttons stack vertically on mobile */
+    .amount-options {
+        flex-direction: column;
+    }
+    
+    .amount-btn {
+        min-width: 100%;
+    }
+}
+
