@@ -503,6 +503,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Make sure the impact story image does not overflow its container */
+    max-width: 400px; /* You can adjust this value */
+    width: 100%;      /* Makes it responsive */
+    overflow: hidden; /* Hides anything that goes outside */
 }
 
 /* Text content area for horizontal card */
