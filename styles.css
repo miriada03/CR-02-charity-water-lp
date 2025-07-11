@@ -153,41 +153,57 @@ body {
     background-color: #FF902A;
 }
 
-/* Add space at the top of the main content so it doesn't hide behind the fixed header */
+/* Main content area - container for the entire layout */
 .main-content {
-    /* Use flexbox to arrange left column content only */
+    /* Use flexbox to arrange content vertically */
     display: flex;
-    /* Put content in a single column */
+    /* Stack content in a column - main row, then impact story */
     flex-direction: column;
-    /* Align items at the start */
-    align-items: flex-start;
-    /* Remove top margin since header is no longer fixed */
+    /* Remove top margin since header is static */
     margin-top: 0px;
-    /* Extend to full width but leave space for hero image - make responsive */
-    max-width: calc(100vw - 30vw);
-    /* Add max-width to match header content container */
+    /* Add space at bottom */
+    margin-bottom: 40px;
+    /* Use full width of viewport */
     width: 100%;
-    max-width: min(calc(100vw - 30vw), 1400px);
-    margin-left: 0;
-    margin-right: 0;
-    /* Add responsive padding with thicker left padding (+50px) */
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Add responsive padding */
     padding: min(5vw, 40px) min(4vw, 40px) min(5vw, 40px) min(6vw, 90px);
+    /* Add gap between main row and impact story */
+    gap: min(6vw, 60px);
     /* Use brand Dark Blue for text color */
     color: #1A3B5C;
 }
 
-/* Left column container for text content and content container */
-.left-column {
+/* Main content row - flex container for text/donation content and hero box */
+.main-content-row {
+    /* Use flexbox to arrange text content and hero box side by side */
+    display: flex;
+    /* Put text content and hero box in a row */
+    flex-direction: row;
+    /* Align items at the start */
+    align-items: flex-start;
+    /* Add space between text content and hero box */
+    gap: min(8vw, 80px);
+    /* Use full width */
+    width: 100%;
+}
+
+/* Container for text content and donation sections (left side of main row) */
+.text-and-donation-content {
+    /* Take up flexible space */
+    flex: 1;
+    /* Minimum width to prevent shrinking too much */
+    min-width: 0;
     /* Use flexbox to stack text content and content container vertically */
     display: flex;
     flex-direction: column;
-    /* Make width responsive instead of fixed */
-    width: 100%;
-    max-width: min(90vw, 650px);
-    flex-shrink: 0;
-    /* Add responsive space between text content and content container */
+    /* Add space between text content and content container */
     gap: min(5vw, 40px);
 }
+
+/* Remove old left-column styles since we renamed it */
 
 .text-content {
     /* Use flexbox to arrange content vertically */
@@ -226,31 +242,29 @@ body {
     font-weight: 500;
 }
 
+/* Hero box - image container (right side of main row) */
 .hero-box {
-    /* Position fixed to viewport to align properly with screen edges */
-    position: fixed;
-    /* Stick to the right edge of the viewport */
-    right: 0;
-    /* Start immediately below the taller nav bar */
-    top: 80px;
-    /* Set width to exactly 30% of viewport width - responsive */
-    width: 30vw;
-    /* Height will be set by JavaScript to end exactly at impact story */
-    height: calc(100vh - 360px); /* Fallback height adjusted for taller nav */
-    /* Remove border radius to sit flush */
-    border-radius: 0;
+    /* Fixed width for hero box */
+    flex: 0 0 auto;
+    width: min(35vw, 400px);
+    /* Set responsive height */
+    height: min(50vh, 500px);
+    /* Push the hero box to the right side */
+    margin-left: auto;
+    /* Add rounded corners for floating window effect */
+    border-radius: 20px;
+    /* Add white background */
+    background-color: white;
     /* Ensure the image doesn't overflow */
     overflow: hidden;
-    /* Ensure it appears above background but below nav and impact story */
+    /* Add subtle border for definition */
+    border: 2px solid #8BD1CB;
+    /* Ensure it appears above background */
     z-index: 10;
-    /* Remove any margin that might create gaps */
-    margin: 0;
-    /* Remove any padding that might create gaps */
-    padding: 0;
 }
 
 /* Style the hero image to fit nicely in its container */
-#hero-img {
+.hero-img {
     /* Make the image fill the container completely */
     width: 100%;
     height: 100%;
@@ -258,21 +272,22 @@ body {
     object-fit: cover;
     /* Center the image within the container */
     object-position: center;
-    /* Remove border radius to sit flush with viewport */
-    border-radius: 0;
-    /* Add a subtle shadow for visual appeal */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Add rounded corners to match container */
+    border-radius: 18px;
 }
 
 .content-container {
     /* Use brand Light Blue for background */
     background-color: rgba(195, 231, 255, 0.8);
-    /* Responsive width that adapts to viewport */
-    width: 100%;
-    max-width: min(90vw, 650px);
+    /* Don't take full width - only as wide as content needs */
+    width: auto;
+    /* Set a max-width to keep it reactive and not too wide */
+    max-width: min(70vw, 600px);
+    /* Align to the left side to match text content above */
+    align-self: flex-start;
     border-radius: 20px;
-    /* Responsive padding */
-    padding: 0px 0px 0px min(4vw, 35px);
+    /* Remove all padding so donation section can reach the edge */
+    padding: 0px;
     /* Add shadow to make it look elevated */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     /* Use flexbox to arrange info-box and donation-section side by side */
@@ -285,13 +300,16 @@ body {
 
 /* Info box containing text - left side */
 .info-box {
-    /* Make width responsive */
+    /* Make width responsive but more compact */
     flex: 1;
     min-width: 0;
-    max-width: min(60vw, 380px);
+    /* Reduce max-width to make container more reactive */
+    max-width: min(35vw, 280px);
     /* Use flexbox to arrange text elements vertically */
     display: flex;
     flex-direction: column;
+    /* Add left padding since we removed it from container */
+    padding-left: min(4vw, 35px);
     /* Responsive margin to the right */
     margin-right: min(4vw, 35px);
 }
@@ -436,110 +454,130 @@ body {
     background: #FF902A;
 }
 
-/* Impact Story Section - showcasing real-world impact */
+/* Impact Story Section - showcasing real-world impact as part of content flow */
 .impact-story-section {
-    /* Stretch across the full viewport width */
-    width: 100vw;
-    /* Position relative to break out of container constraints */
+    /* Position as part of normal document flow */
     position: relative;
-    /* Move left to align with viewport edge - account for increased left padding */
-    left: calc(-1 * min(6vw, 90px));
-    /* Add responsive spacing above and below the impact story */
-    margin: min(8vw, 60px) 0 min(6vw, 40px) 0;
-    /* Use white background for the large bar effect */
+    /* Use full width of main content */
+    width: 100%;
+    /* Set height for horizontal card layout */
+    height: auto;
+    min-height: 120px;
+    /* Use white background for the card effect */
     background-color: #ffffff;
-    /* Add responsive padding around the content */
-    padding: min(8vw, 60px) 0;
-    /* Add subtle shadow for depth */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    /* Ensure it appears above hero-box with higher z-index */
-    z-index: 100;
+    /* Add shadow for elevated card appearance */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* Add rounded corners for card effect */
+    border-radius: 15px;
+    /* Add padding for the card content */
+    padding: 30px 0;
+    /* Add margin for spacing from other content */
+    margin-top: min(4vw, 40px);
 }
 
-/* Inner container for flexible layout options */
+/* Inner container for horizontal card layout */
 .impact-story-container {
-    /* Center the content within the full-width section - make responsive */
-    max-width: calc(100vw - 30vw - min(10vw, 80px));
+    /* Remove max-width to stretch full width */
+    width: 100%;
     margin: 0 auto;
-    /* Use flexbox for side-by-side layout */
+    /* Use flexbox for horizontal layout */
     display: flex;
-    /* Align items at the center */
+    /* Align items in center vertically */
     align-items: center;
-    /* Add responsive space between image and text */
-    gap: min(8vw, 60px);
-    /* Add responsive horizontal padding */
-    padding: 0 min(5vw, 40px);
+    /* Add space between image and text */
+    gap: 40px;
+    /* Set fixed 60px horizontal padding */
+    padding: 0 60px;
+    /* Ensure minimum height for card */
+    min-height: 80px;
 }
 
-/* Image container */
+/* Image container for horizontal card */
 .impact-story-image {
-    /* Take up responsive space for the image */
-    flex: 0 0 min(40vw, 300px);
+    /* Fixed size for horizontal card layout */
+    flex: 0 0 auto;
+    /* Larger image size for content section */
+    width: 120px;
+    height: 120px;
     /* Center the image within its container */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Text content area */
+/* Text content area for horizontal card */
 .impact-story-text {
     /* Take up remaining space */
     flex: 1;
-    /* Use flexbox to stack text elements vertically */
+    /* Use flexbox to arrange text in a single line for card */
     display: flex;
-    flex-direction: column;
-    /* Add responsive space between text elements */
-    gap: min(3vw, 20px);
-    /* Add responsive left padding for breathing room */
-    padding-left: min(3vw, 20px);
+    flex-direction: row;
+    /* Align items in center for horizontal layout */
+    align-items: center;
+    /* Add space between text elements */
+    gap: 20px;
+    /* Remove padding for compact card layout */
+    padding: 0;
 }
 
-/* Impact story title styling */
+/* Impact story title styling for horizontal card */
 .impact-story-title {
-    /* Responsive font size for the heading */
-    font-size: clamp(1.4em, 3vw, 1.8em);
+    /* Larger font size for content section */
+    font-size: 1.5em;
     font-weight: bold;
     /* Use brand Dark Blue color */
     color: #1A3B5C;
-    /* Remove default margins */
+    /* Remove margins for inline layout */
     margin: 0;
-    /* Better line height for readability */
+    /* Better line height for compact display */
     line-height: 1.3;
+    /* Allow text wrapping for content section */
+    white-space: normal;
 }
 
-/* Impact story description text */
+/* Impact story description text for horizontal card */
 .impact-story-description {
-    /* Responsive font size for readability */
-    font-size: clamp(1.0em, 2vw, 1.1em);
+    /* Normal font size for content section */
+    font-size: 1.0em;
     /* Use brand Dark Blue color */
     color: #1A3B5C;
     /* Better line height for readability */
-    line-height: 1.6;
-    /* Remove default margins */
+    line-height: 1.5;
+    /* Remove margins for inline layout */
     margin: 0;
-    /* Medium font weight */
+    /* Normal font weight */
     font-weight: 400;
+    /* Allow text to wrap in available space */
+    flex: 1;
+    /* Allow more lines for content section */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-/* Impact statistics text */
+/* Impact statistics text for horizontal card */
 .impact-story-stats {
-    /* Responsive font size for stats */
-    font-size: clamp(0.9em, 1.8vw, 1.0em);
+    /* Normal font size for content section */
+    font-size: 1.0em;
     /* Use brand Dark Blue color */
     color: #1A3B5C;
     /* Better line height for readability */
-    line-height: 1.6;
-    /* Remove default margins */
+    line-height: 1.4;
+    /* Remove margins for inline layout */
     margin: 0;
-    /* Medium font weight */
-    font-weight: 500;
+    /* Medium font weight for emphasis */
+    font-weight: 600;
+    /* Allow text wrapping for content section */
+    white-space: normal;
 }
 
-/* Impact story image styling */
+/* Impact story image styling for horizontal card */
 .impact-img {
-    /* Make image responsive */
-    width: min(35vw, 250px);
-    height: min(35vw, 250px);
+    /* Larger image for content section */
+    width: 120px;
+    height: 120px;
     /* Use object-fit to maintain aspect ratio */
     object-fit: cover;
     /* Add rounded corners */
@@ -548,58 +586,204 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Call-to-Action Section - final donation CTA at bottom of page */
+.cta-section {
+    /* Position as part of normal document flow */
+    position: relative;
+    /* Use full width of main content */
+    width: 100%;
+    /* Use brand Yellow gradient background for attention */
+    background: linear-gradient(135deg, #FFC907 0%, #FF902A 100%);
+    /* Reduced padding for more condensed appearance */
+    padding: min(3vw, 30px) 0;
+    /* Reduced margin for tighter spacing */
+    margin-top: min(3vw, 30px);
+    /* Add rounded corners to match other cards */
+    border-radius: 15px;
+}
+
+/* Inner container for CTA content */
+.cta-container {
+    /* Center the content within the section */
+    max-width: 800px;
+    margin: 0 auto;
+    /* Center align all text */
+    text-align: center;
+    /* Reduced horizontal padding for more condensed appearance */
+    padding: 0 min(3vw, 30px);
+}
+
+/* CTA title styling */
+.cta-title {
+    /* Large, bold title */
+    font-size: clamp(2.0em, 5vw, 3.0em);
+    font-weight: 900;
+    /* Use brand Dark Blue color for contrast */
+    color: #1A3B5C;
+    /* Remove default margins */
+    margin: 0 0 min(3vw, 30px) 0;
+    /* Good line height for readability */
+    line-height: 1.2;
+}
+
+/* CTA description text */
+.cta-description {
+    /* Medium font size for description */
+    font-size: clamp(1.1em, 2.5vw, 1.4em);
+    /* Use brand Dark Blue color */
+    color: #1A3B5C;
+    /* Good line height for readability */
+    line-height: 1.6;
+    /* Reduce bottom margin for more condensed appearance */
+    margin: 0 0 min(3vw, 30px) 0;
+    /* Medium font weight */
+    font-weight: 500;
+    /* Maximum width for better readability */
+    max-width: 600px;
+    /* Center the text block */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: min(3vw, 30px);
+}
+
+/* Main CTA donate button */
+.cta-donate-button {
+    /* Large, prominent button */
+    background-color: #1A3B5C;
+    /* White text for contrast */
+    color: white;
+    /* Remove default button styling */
+    border: none;
+    /* Large padding for prominence */
+    padding: min(4vw, 20px) min(8vw, 60px);
+    /* Large font size */
+    font-size: clamp(1.1em, 2.5vw, 1.3em);
+    /* Bold text */
+    font-weight: bold;
+    /* Rounded corners */
+    border-radius: 12px;
+    /* Pointer cursor on hover */
+    cursor: pointer;
+    /* Smooth transition for hover effects */
+    transition: all 0.3s ease;
+    /* Add subtle shadow */
+    box-shadow: 0 4px 15px rgba(26, 59, 92, 0.3);
+}
+
+/* CTA button hover effect */
+.cta-donate-button:hover {
+    /* Darker background on hover */
+    background-color: #0F2A42;
+    /* Lift the button slightly */
+    transform: translateY(-2px);
+    /* Enhance shadow on hover */
+    box-shadow: 0 6px 20px rgba(26, 59, 92, 0.4);
+}
+
 /* Tablet and smaller desktop responsiveness */
 @media (max-width: 1024px) {
-    /* Adjust hero-box for smaller screens */
-    .hero-box {
-        /* Increase width percentage for smaller screens */
-        width: 35vw;
-    }
-    
-    /* Adjust main content width accordingly */
+    /* Adjust main content layout for tablet */
     .main-content {
-        max-width: min(calc(100vw - 35vw), 1400px);
+        gap: min(4vw, 40px);
     }
     
-    /* Adjust impact story container for smaller screens */
+    /* Reduce gap between text and hero box */
+    .main-content-row {
+        gap: min(6vw, 60px);
+    }
+    
+    /* Adjust hero box size for tablet */
+    .hero-box {
+        width: min(40vw, 350px);
+        height: min(45vh, 450px);
+    }
+    
+    /* Adjust impact story card for tablet */
     .impact-story-container {
-        max-width: calc(100vw - 35vw - min(8vw, 60px));
+        gap: 30px;
+        padding: 0 60px;
+    }
+    
+    .impact-story-title {
+        font-size: 1.3em;
+    }
+    
+    .impact-story-description {
+        font-size: 0.95em;
+    }
+    
+    /* Adjust CTA section for tablet - condensed */
+    .cta-section {
+        padding: min(4vw, 40px) 0;
+        margin-top: min(3vw, 30px);
+    }
+    
+    .cta-container {
+        padding: 0 min(3vw, 30px);
     }
 }
 
 /* Small tablet responsiveness */
 @media (max-width: 900px) {
-    /* Further adjust hero-box for very small screens before mobile */
+    /* Switch to vertical stacking on smaller tablets */
+    .main-content-row {
+        flex-direction: column;
+        gap: min(4vw, 30px);
+    }
+    
+    /* Hero box adjustments for stacked layout */
     .hero-box {
-        width: 40vw;
+        /* Use full width when stacked */
+        width: 100%;
+        max-width: 500px;
+        height: min(40vh, 350px);
+        /* Center the hero box */
+        align-self: center;
     }
     
     .main-content {
-        max-width: min(calc(100vw - 40vw), 1400px);
         /* Adjust left padding for smaller screens */
         padding: min(5vw, 40px) min(4vw, 40px) min(5vw, 40px) min(5vw, 70px);
+        gap: min(5vw, 40px);
     }
     
+    /* Adjust impact story card for smaller tablet */
     .impact-story-container {
-        max-width: calc(100vw - 40vw - min(6vw, 40px));
+        gap: 20px;
+        padding: 0 60px;
     }
     
-    .impact-story-section {
-        /* Adjust left offset for smaller tablet left padding */
-        left: calc(-1 * min(5vw, 70px));
+    .impact-story-text {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .impact-story-title {
+        font-size: 1.2em;
+    }
+    
+    .impact-story-stats {
+        font-size: 0.9em;
     }
     
     /* Stack content container on smaller tablets */
     .content-container {
         flex-direction: column;
         gap: 0px;
-        padding: min(4vw, 25px);
+        /* Remove padding since we handle it in info-box */
+        padding: 0px;
+        /* Use full width on smaller tablets */
+        width: 100%;
+        align-self: stretch;
     }
     
     .info-box {
         margin-right: 0;
         margin-bottom: min(3vw, 20px);
         max-width: none;
+        /* Add padding for smaller tablets */
+        padding: min(4vw, 25px);
     }
     
     .donation-section {
@@ -608,32 +792,46 @@ body {
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.3);
     }
+    
+    /* Adjust CTA section for small tablet - condensed */
+    .cta-section {
+        padding: min(3vw, 30px) 0;
+        margin-top: min(3vw, 30px);
+    }
+    
+    .cta-donate-button {
+        padding: min(3vw, 18px) min(6vw, 50px);
+        font-size: clamp(1.0em, 2.2vw, 1.2em);
+    }
 }
 
 /* Mobile layout - stack sections vertically on phones */
 @media (max-width: 768px) {
-    /* Stack the main content vertically on mobile */
+    /* Adjust main content for mobile */
     .main-content {
-        /* Change from row to column layout */
-        flex-direction: column;
         /* Reduce gap for mobile */
         gap: min(4vw, 30px);
-        /* Add top margin for mobile to account for fixed header */
+        /* Add top margin for mobile to account for header */
         margin-top: 80px;
         /* Reset padding for mobile - reduce left padding significantly */
         padding: min(3vw, 20px) min(2vw, 15px) min(3vw, 20px) min(3vw, 25px);
         /* Reset max-width for mobile */
         max-width: none;
-        margin-left: auto;
-        margin-right: auto;
     }
     
-    /* Stack left column content with reduced gap on mobile */
-    .left-column {
+    /* Stack the main content row vertically on mobile */
+    .main-content-row {
+        /* Change to column layout */
+        flex-direction: column;
+        /* Reduce gap for mobile */
         gap: min(4vw, 30px);
-        /* Reset width for mobile */
+    }
+    
+    /* Adjust text and donation content for mobile */
+    .text-and-donation-content {
+        gap: min(4vw, 30px);
+        /* Use full width */
         width: 100%;
-        max-width: none;
     }
     
     /* Allow text content to use full width on mobile */
@@ -653,22 +851,18 @@ body {
     
     /* Make hero box responsive on mobile */
     .hero-box {
-        /* Reset positioning for mobile - use relative to follow document flow */
-        position: relative !important;
-        right: auto !important;
-        top: auto !important;
+        /* Use full width */
         width: 100% !important;
         height: 300px !important;
-        margin: 20px 0 !important;
         border-radius: 15px !important;
-        /* Reset z-index for mobile */
-        z-index: auto !important;
         /* Order it first in the flex layout */
         order: -1;
+        /* Center it */
+        align-self: center;
     }
     
     /* Reset hero image for mobile */
-    #hero-img {
+    .hero-img {
         border-radius: 15px;
     }
     
@@ -676,14 +870,20 @@ body {
     .content-container {
         flex-direction: column;
         gap: 0px;
-        padding: 25px;
+        /* Remove padding since we handle it in info-box */
+        padding: 0px;
         max-width: none;
+        /* Use full width on mobile */
+        width: 100%;
+        align-self: stretch;
     }
     
     /* Reset info box margin on mobile */
     .info-box {
         margin-right: 0;
         margin-bottom: 30px;
+        /* Add padding for mobile */
+        padding: 25px;
     }
     
     /* Reset donation section styling on mobile */
@@ -692,10 +892,6 @@ body {
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         padding: 25px 20px;
-    }
-    
-    /* Remove max width on mobile */
-    .donation-section {
         max-width: none;
     }
     
@@ -708,57 +904,83 @@ body {
         min-width: 100%;
     }
     
-    /* Impact story mobile styles */
+    /* Impact story mobile styles - keep as part of content flow */
     .impact-story-section {
-        /* Keep full width on mobile */
-        width: 100vw;
-        /* Adjust left offset for mobile reduced padding */
-        left: calc(-1 * min(3vw, 25px));
-        /* Reduce margins and padding for mobile */
-        margin: min(6vw, 40px) 0 min(4vw, 30px) 0;
-        padding: min(6vw, 40px) 0;
+        /* Keep as part of normal flow */
+        margin-top: min(4vw, 30px);
+        padding: 20px 0;
+        border-radius: 12px;
     }
     
-    /* Stack impact story content vertically on mobile */
+    /* Adjust impact story card for mobile */
     .impact-story-container {
-        /* Change to column layout */
+        /* Stack vertically on mobile */
         flex-direction: column;
-        /* Reduce gap for mobile */
-        gap: min(4vw, 30px);
-        /* Reset max-width and padding for mobile */
-        max-width: none;
-        padding: 0 min(3vw, 20px);
-    }
-    
-    /* Reset image container for mobile */
-    .impact-story-image {
-        /* Reset flex properties for mobile */
-        flex: none;
-        /* Center the image */
-        justify-content: center;
-    }
-    
-    /* Reset text container for mobile */
-    .impact-story-text {
-        /* Remove left padding on mobile */
-        padding-left: 0;
-        /* Center text on mobile */
+        gap: 20px;
+        padding: 0 60px;
         text-align: center;
     }
     
-    /* Adjust text sizes for mobile */
+    /* Adjust image for mobile */
+    .impact-story-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .impact-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Adjust text for mobile */
+    .impact-story-text {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
     .impact-story-title {
-        font-size: 1.5em;
+        font-size: 1.3em;
+        text-align: center;
     }
     
     .impact-story-description {
         font-size: 1.0em;
+        text-align: center;
+        -webkit-line-clamp: none;
+        line-clamp: none;
+        display: block;
     }
     
-    /* Make image smaller on mobile */
-    .impact-img {
-        width: min(50vw, 200px);
-        height: min(50vw, 200px);
+    .impact-story-stats {
+        font-size: 0.9em;
+        text-align: center;
+    }
+    
+    /* Adjust CTA section for mobile - condensed */
+    .cta-section {
+        padding: min(3vw, 25px) 0;
+        margin-top: min(3vw, 25px);
+    }
+    
+    .cta-container {
+        padding: 0 min(3vw, 15px);
+    }
+    
+    .cta-title {
+        font-size: 2.0em;
+    }
+    
+    .cta-description {
+        font-size: 1.1em;
+        margin-bottom: min(3vw, 30px);
+    }
+    
+    .cta-donate-button {
+        padding: 16px 40px;
+        font-size: 1.1em;
+        width: 100%;
+        max-width: 300px;
     }
 }
 
